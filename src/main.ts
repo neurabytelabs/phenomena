@@ -4,7 +4,7 @@ import { createEngine } from './core/engine'
 import { clampState, createSeed, parseState, serializeState } from './core/state'
 import type { ExperienceState } from './core/types'
 import { getScene } from './scenes'
-import { createControls } from './ui/controls'
+import { builderCreditMarkup, createControls } from './ui/controls'
 import { createInfo } from './ui/info'
 import { createToast } from './ui/toast'
 import './styles.css'
@@ -31,7 +31,7 @@ if (!canvas.getContext('2d')) {
       <h1>${APP_NAME}</h1>
       <p>${TAGLINE}</p>
       <p>Your browser cannot start the Canvas 2D instrument. Try a current browser with canvas enabled.</p>
-      <p>${BUILDER_CREDIT}</p>
+      ${builderCreditMarkup()}
     </div>
   `
 } else {

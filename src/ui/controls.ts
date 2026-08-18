@@ -1,3 +1,4 @@
+import { BUILDER_CREDIT } from '../app'
 import type { ExperienceState, Phenomenon, SceneId } from '../core/types'
 
 export interface ControlsOptions {
@@ -16,6 +17,10 @@ export interface ControlsHandle {
   element: HTMLElement
   infoButton: HTMLButtonElement
   sync(state: ExperienceState, phenomenon: Phenomenon, infoOpen: boolean): void
+}
+
+export function builderCreditMarkup(): string {
+  return `<a class="credit" href="https://mustafasarac.com/" target="_blank" rel="noreferrer">${BUILDER_CREDIT}</a>`
 }
 
 function createRange(
@@ -49,7 +54,7 @@ export function createControls(options: ControlsOptions): ControlsHandle {
         <p class="ui-kicker">PHENOMENA</p>
         <h1 class="tagline">Touch the equation. Watch the world answer.</h1>
       </div>
-      <p class="credit">Built by Mustafa Sarac / NeuraByte Labs</p>
+      ${builderCreditMarkup()}
     </header>
     <nav class="scene-rail" aria-label="Scenes"></nav>
     <section class="controls-panel" id="controls-panel" aria-label="Controls"></section>

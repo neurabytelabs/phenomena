@@ -36,6 +36,7 @@ input {
 
 button:focus-visible,
 input:focus-visible,
+.credit:focus-visible,
 .skip-link:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
@@ -94,6 +95,7 @@ input:focus-visible,
   position: absolute;
   top: calc(var(--safe-top) + 4.4rem);
   right: 1rem;
+  text-decoration: none;
 }
 
 .skip-link {
@@ -376,10 +378,6 @@ body[data-ui-state='idle'] .info-panel {
     font-size: 0.92rem;
     line-height: 1.05;
     max-width: 14ch;
-  }
-
-  .credit {
-    display: none;
   }
 
   .info-panel {
