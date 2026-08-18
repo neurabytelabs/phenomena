@@ -2,7 +2,7 @@
 
 Touch the equation. Watch the world answer.
 
-Status on August 19, 2026 (+03): Release 1 is live and browser-verified in noindex mode at [phenomena.91-98-46-190.sslip.io](https://phenomena.91-98-46-190.sslip.io/); the indexable promotion is independently approved and deploy-pending, not yet claimed live.
+Status on August 19, 2026 (+03): Release 1 is live, indexable, and browser-verified at [phenomena.91-98-46-190.sslip.io](https://phenomena.91-98-46-190.sslip.io/).
 
 PHENOMENA is a static Vite + TypeScript living-systems instrument by Mustafa Saraç / NeuraByte Labs. Release 1 ships four bounded scenes on one Canvas 2D surface:
 
@@ -56,21 +56,23 @@ npm run dev
 - All four scenes translate `FORCE`, `MEMORY`, and `SCALE`; scene parameter mappings have regression tests
 - Four still scenes were captured and visually distinguished
 
-## Live Noindex Verification
+## Live Indexable Verification
 
 - Public repository and deployed commit were reconciled
 - Isolated Coolify application reports `running:healthy`
 - Valid Let's Encrypt TLS and canonical host were verified
 - HTML returns `no-store`; hashed assets return immutable one-year caching
-- Security and noindex headers are present on HTML and assets
+- HTML has no robots noindex directive or `X-Robots-Tag`; `robots.txt` allows crawling and advertises the sitemap
+- `sitemap.xml` returns HTTP 200 with the canonical live URL
 - Unknown asset returns HTTP 404; an extensionless SPA route returns the application shell
-- Desktop and 390×844 mobile interactions, layout, runtime, console, and network gates passed
+- Desktop and 390×844 mobile interactions, layout, runtime, console, network, and visual gates passed
+- ORBIT and CHORUS respond to `MEMORY`; STRATA respects reduced motion
+- Mobile toast remains visible normally and hides while the info panel is open, preventing text overlap
 
-## Remaining Release Gate
+## Next Optional Release Gate
 
-- Deploy the independently approved indexable release
-- Verify live robots metadata, sitemap, headers, desktop/mobile interaction, and exact deployment SHA
-- Only then synchronize final live status into this README and Core
+- Attach and verify a branded `phenomena.mustafasarac.com` host when Cloudflare access is available
+- Preserve the verified sslip.io host until branded DNS and TLS pass independently
 
 ## Explicit Exclusions
 
@@ -81,7 +83,7 @@ npm run dev
 - No AI runtime
 - No payments or messaging
 - No Lithosphere mutation
-- No branded DNS claim; Release 1 uses the reversible sslip.io host because Cloudflare required a manual login
+- No branded DNS claim yet; Release 1 uses the reversible sslip.io host because Cloudflare required a manual login
 
 ## Evidence
 

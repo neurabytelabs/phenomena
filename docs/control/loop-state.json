@@ -1,16 +1,17 @@
 {
   "project": "PHENOMENA",
-  "status": "LIVE_NOINDEX_VERIFIED_INDEXABLE_PROMOTION_APPROVED_DEPLOY_PENDING",
+  "status": "LIVE_INDEXABLE_VERIFIED",
   "started_at": "2026-08-18T23:50:00+03:00",
   "target_morning_gate": "2026-08-19T06:00:00+03:00",
-  "current_loop": "L4_INDEXABLE_PROMOTION",
-  "next_loop": "TASK13_LIVE_TRUTH_SYNC",
+  "current_loop": "L5_LIVE_TRUTH_SYNC",
+  "next_loop": "OPTIONAL_BRANDED_DNS",
   "completed_loops": [
     "L0_CONTEXT_AND_DESIGN",
     "L1_FOUNDATION_AND_HERO",
     "L2_SYSTEMS_AND_INTERACTION",
     "L3_LOCAL_VERIFICATION",
-    "L4_NOINDEX_DEPLOY_AND_LIVE_QA"
+    "L4_NOINDEX_DEPLOY_AND_LIVE_QA",
+    "L5_INDEXABLE_PROMOTION_AND_LIVE_QA"
   ],
   "fixed_decisions": {
     "product": "living-systems instrument",
@@ -32,7 +33,10 @@
     "public_repo_verified": true,
     "deployment_verified": true,
     "live_tls_verified": true,
-    "core_truth_synced": false
+    "indexable_robots_verified": true,
+    "sitemap_verified": true,
+    "core_truth_synced": true,
+    "core_truth_integrated_main": false
   },
   "workers": {
     "RICK": "active",
@@ -52,11 +56,33 @@
     "dns_changed": false,
     "existing_service_changed": false
   },
+  "core_truth_evidence": {
+    "worktree": "/Users/mustafa/Documents/GitHub/mustafasarac-core-phenomena",
+    "branch": "project/phenomena-launch-20260818",
+    "commit": "95ecf736255d553f650b782f7eea8b048015b4cc",
+    "remote_push": false,
+    "integrated_main": false
+  },
   "live_noindex_evidence": {
     "url": "https://phenomena.91-98-46-190.sslip.io/",
     "application_uuid": "6slokigyf8nsclqbtv5gjth4",
     "deployment_uuid": "q56hurytky4432i47uberuux",
     "commit": "37eeeca307c16bf366146f32fab44e78e941ddb6",
     "application_status": "running:healthy"
+  },
+  "live_indexable_evidence": {
+    "url": "https://phenomena.91-98-46-190.sslip.io/",
+    "application_uuid": "6slokigyf8nsclqbtv5gjth4",
+    "deployment_uuid": "ayiyxr2o2ziglp8djpfbwjo1",
+    "commit": "a3c2a6f9ccf4a22a8056ec127e83586d6ae04919",
+    "application_status": "running:healthy",
+    "robots_meta": null,
+    "x_robots_tag": null,
+    "robots_txt_allows": true,
+    "sitemap_http_200": true,
+    "desktop_overflow": 0,
+    "mobile_overflow": 0,
+    "console_errors": 0,
+    "failed_application_requests": 0
   }
 }
