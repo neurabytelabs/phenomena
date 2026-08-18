@@ -1,7 +1,7 @@
 FROM node:22-alpine AS build
 WORKDIR /app
 
-COPY package.json package-lock.json tsconfig.json vite.config.ts index.html ./
+COPY package.json package-lock.json tsconfig.json vite.config.ts index.html Dockerfile nginx.conf ./
 COPY public ./public
 COPY scripts ./scripts
 COPY src ./src
