@@ -7,6 +7,7 @@ const htmlPath = path.join(distDir, 'index.html')
 const cssPath = path.join(root, 'src', 'styles.css')
 const nginxPath = path.join(root, 'nginx.conf')
 const dockerfilePath = path.join(root, 'Dockerfile')
+const packagePath = path.join(root, 'package.json')
 const sourceRoots = ['src', 'index.html', 'public', 'package.json']
 const forbiddenPatterns = [
   /getusermedia/i,
@@ -45,6 +46,7 @@ async function main() {
   const css = await readFile(cssPath, 'utf8')
   const nginx = await readFile(nginxPath, 'utf8')
   const dockerfile = await readFile(dockerfilePath, 'utf8')
+  const packageJson = JSON.parse(await readFile(packagePath, 'utf8'))
 
   assert(html.includes('<title>PHENOMENA'), 'Missing PHENOMENA title in built HTML.')
   assert(html.includes('Touch the equation. Watch the world answer.'), 'Missing tagline in built HTML.')
@@ -88,6 +90,10 @@ async function main() {
   assert(nginx.includes('try_files $uri =404;'), 'Missing real 404 behavior for unknown assets.')
   assert(nginx.includes('X-Robots-Tag "noindex, nofollow"'), 'Missing runtime noindex header.')
   assert(dockerfile.includes('HEALTHCHECK'), 'Missing container healthcheck.')
+  assert(
+    packageJson.optionalDependencies?.['@rollup/rollup-linux-x64-musl'] === '4.62.2',
+    'Missing pinned Linux Rollup binary required by the Alpine build image.'
+  )
 
   const files = (await Promise.all(sourceRoots.map((sourceRoot) => readTree(path.join(root, sourceRoot))))).flat()
   for (const file of files) {
