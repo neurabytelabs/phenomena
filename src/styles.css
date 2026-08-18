@@ -392,6 +392,11 @@ body[data-ui-state='idle'] .info-panel {
     width: calc(100vw - 1.5rem);
     text-align: center;
   }
+
+  .ui-shell[data-info-open='true'] ~ .toast {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -34,8 +34,8 @@ Result: passed.
 Final build output:
 
 - `dist/index.html` 1.37 kB
-- `dist/assets/index-CgeDsdmC.css` 5.54 kB
-- `dist/assets/index-CV1Hvv1L.js` 19.37 kB
+- `dist/assets/index-D976kFbU.css` 5.60 kB
+- `dist/assets/index-CA_H7kKd.js` 19.37 kB
 
 ```bash
 npm run verify
@@ -89,6 +89,7 @@ Latest-disk scene grammar verification:
 - CHORUS maps `MEMORY` to temporal phase persistence; a paused live-canvas PNG digest changed when `MEMORY` changed from `0` to `1`.
 - STRATA applies the reduced-motion factor to ambient drift and fracture expansion.
 - Fresh local browser reload after these fixes produced zero runtime, console, log, or network errors.
+- Mobile visual QA caught a transient toast obscuring open info text; the toast is now hidden while the mobile info panel is open, with a measured `12.0 px` info-to-scene gap and overflow `0`.
 
 Visual verdict: `CONDITIONAL PASS`. The primary metaphor and four scene identities are visible; Pelagic is intentionally closest to the reference language, while Strata and Chorus remain line-based relatives and Orbit is deliberately sparse. No release-blocking overlap remains.
 
