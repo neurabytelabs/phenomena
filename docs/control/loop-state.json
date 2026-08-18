@@ -59,7 +59,7 @@
   "core_truth_evidence": {
     "worktree": "/Users/mustafa/Documents/GitHub/mustafasarac-core-phenomena",
     "branch": "project/phenomena-launch-20260818",
-    "commit": "95ecf736255d553f650b782f7eea8b048015b4cc",
+    "commit": "214bfa385440f00d787155183f6eb5e2bd9fc5cf",
     "remote_push": false,
     "integrated_main": false
   },
@@ -73,8 +73,8 @@
   "live_indexable_evidence": {
     "url": "https://phenomena.91-98-46-190.sslip.io/",
     "application_uuid": "6slokigyf8nsclqbtv5gjth4",
-    "deployment_uuid": "ayiyxr2o2ziglp8djpfbwjo1",
-    "commit": "a3c2a6f9ccf4a22a8056ec127e83586d6ae04919",
+    "deployment_uuid": "hei2veekjswmkcmpw5xfycws",
+    "commit": "ed8c6f16c965e83f9f0936730f4fb36da3f4669c",
     "application_status": "running:healthy",
     "robots_meta": null,
     "x_robots_tag": null,
@@ -83,6 +83,9 @@
     "desktop_overflow": 0,
     "mobile_overflow": 0,
     "console_errors": 0,
-    "failed_application_requests": 0
+    "failed_application_requests": 0,
+    "builder_credit_link_verified": true,
+    "builder_credit_mobile_visible": true,
+    "builder_credit_mobile_hit_target": true
   }
 }

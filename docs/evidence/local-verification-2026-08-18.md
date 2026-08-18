@@ -1,6 +1,6 @@
 # PHENOMENA Local Verification
 
-Verification window: August 18–19, 2026
+Verification window: August 18–19, 2026 (+03; the UTC calendar date remained August 18 during the final checks)
 Repository: `https://github.com/neurabytelabs/phenomena`
 Live status: indexable Release 1 verified at `https://phenomena.91-98-46-190.sslip.io/`
 
@@ -16,7 +16,7 @@ Result: passed.
 npm test -- --run
 ```
 
-Result: passed with 18 tests across:
+Result: passed with 21 tests across:
 
 - `tests/smoke.test.ts`
 - `tests/random.test.ts`
@@ -34,8 +34,8 @@ Result: passed.
 Final build output:
 
 - `dist/index.html` 1.37 kB
-- `dist/assets/index-D976kFbU.css` 5.60 kB
-- `dist/assets/index-CA_H7kKd.js` 19.37 kB
+- `dist/assets/index-DudkL_rz.css` 5.63 kB
+- `dist/assets/index-DHp8IKCy.js` 19.42 kB
 
 ```bash
 npm run verify
@@ -132,16 +132,18 @@ Container runtime checks were not claimed locally. The proof gap was subsequentl
 
 - Indexable promotion commit `4225d13588f74775080d9d1e0ca5bd38e9473c5a` deployed successfully as `3n1nyhpag7agorzrsyukqvam`.
 - Final mobile-overlap fix commit `a3c2a6f9ccf4a22a8056ec127e83586d6ae04919` matched `origin/main` and deployed successfully as `ayiyxr2o2ziglp8djpfbwjo1`.
+- Builder-provenance closure commit `ed8c6f16c965e83f9f0936730f4fb36da3f4669c` matched `origin/main` and deployed successfully as `hei2veekjswmkcmpw5xfycws`.
 - Coolify deployment terminal state was `finished`; application read-back remained `running:healthy`.
 - Live HTML has no robots noindex meta; `X-Robots-Tag` is absent.
 - `/robots.txt`: HTTP 200, `Allow: /`, canonical sitemap declaration, `Cache-Control: no-store`.
 - `/sitemap.xml`: HTTP 200, canonical live URL, no stale or anticipatory `lastmod`, `Cache-Control: no-store`.
-- Final hashed assets are `index-CA_H7kKd.js` and `index-D976kFbU.css`.
+- Final hashed assets are `index-DHp8IKCy.js` and `index-DudkL_rz.css`.
 - Desktop `1512×888`: canvas `1512×888`, overflow `0`, CHORUS `MEMORY` changed the paused canvas digest, Info/Escape state passed, console/network errors `0`.
 - Mobile `390×844`: canvas `390×844`, overflow `0`, info/scene gap `12.9 px`, scene/action gap `13.4 px`, action/control gap `21.9 px`.
 - Mobile toast was visible before opening Info and computed `visibility: hidden; opacity: 0` while Info was open; screenshot inspection found no remaining overlap.
+- The provenance credit links to `https://mustafasarac.com/` with `target="_blank"` and `rel="noreferrer"` in both the main UI and unsupported-canvas fallback. Live `390×844` QA measured a `10.4 px` tagline gap, visible/clickable hit target, canvas backing store `585×1266`, horizontal overflow `0`, and no runtime/log/network failures.
 - Final desktop and mobile screenshots were independently inspected and returned release `PASS`.
-- Core source-of-truth was synchronized in isolated worktree branch `project/phenomena-launch-20260818` as local commit `95ecf736255d553f650b782f7eea8b048015b4cc`; Core push and main integration were intentionally not performed.
+- Core source-of-truth was synchronized in isolated worktree branch `project/phenomena-launch-20260818` as local commit `214bfa385440f00d787155183f6eb5e2bd9fc5cf`; Core push and main integration were intentionally not performed.
 
 ## Review summary
 
@@ -149,6 +151,7 @@ Container runtime checks were not claimed locally. The proof gap was subsequentl
 - Independent final candidate review returned `APPROVED` after nginx SPA/404 and publication-truth fixes
 - Indexable-promotion review requested release-wording and sitemap-verifier fixes; each finding was corrected
 - A delayed spec review identified missing ORBIT/CHORUS `MEMORY` mappings and STRATA reduced-motion consistency; the current working tree fixes these with regression coverage
+- A second delayed review batch targeted stale commit `adb234d`: its nginx SPA-fallback critical finding was superseded and contradicted by the current config plus live extensionless-route HTTP 200 evidence. Its still-current builder-credit link gap was closed across main, fallback, and `390×844` states with TDD and live QA.
 - Latest-disk independent re-review returned `APPROVED` with no critical, important, or minor findings
 - Indexable promotion and its final visual fix passed commit, push, deploy, runtime read-back, and browser QA
 - Lithosphere remained untouched

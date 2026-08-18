@@ -42,10 +42,10 @@ npm run verify
 npm run dev
 ```
 
-## Verified On August 19, 2026
+## Verified On August 19, 2026 (+03)
 
 - `npm run typecheck` passed
-- `npm test -- --run` passed with 18 tests
+- `npm test -- --run` passed with 21 tests
 - `npm run build` passed
 - `npm run verify` passed
 - `npm audit --audit-level=moderate` passed with 0 vulnerabilities
@@ -54,6 +54,7 @@ npm run dev
 - Fresh runtime exception, console error, log warning, and failed-request set was empty
 - URL state round-trip verified for scene and bounded parameters
 - All four scenes translate `FORCE`, `MEMORY`, and `SCALE`; scene parameter mappings have regression tests
+- The builder provenance is a visible, keyboard-focusable link in the main UI and unsupported-canvas fallback, including the `390×844` target
 - Four still scenes were captured and visually distinguished
 
 ## Live Indexable Verification
