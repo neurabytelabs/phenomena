@@ -17,6 +17,10 @@ interface Pulse {
   strength: number
 }
 
+export function strataMotionFactor(reducedMotion: boolean): number {
+  return reducedMotion ? 0.15 : 1
+}
+
 export function createStrata(): Phenomenon {
   let layers: Layer[] = []
   let pulses: Pulse[] = []
@@ -48,6 +52,7 @@ export function createStrata(): Phenomenon {
       previousDown = false
     },
     update(frame) {
+      const motion = strataMotionFactor(frame.reducedMotion)
       pressure = lerp(pressure, frame.pointer.down ? frame.pointer.hold * frame.state.force : 0, frame.pointer.down ? 0.1 : 0.08)
 
       if (previousDown && !frame.pointer.down && pressure > 0.08) {
@@ -63,7 +68,7 @@ export function createStrata(): Phenomenon {
       pulses = pulses
         .map((pulse) => ({
           ...pulse,
-          radius: pulse.radius + frame.delta * (0.36 + frame.state.scale * 0.48),
+          radius: pulse.radius + frame.delta * (0.36 + frame.state.scale * 0.48) * motion,
           strength: pulse.strength * (0.986 - (1 - frame.state.memory) * 0.012)
         }))
         .filter((pulse) => pulse.radius < 1.4 && pulse.strength > 0.03)
@@ -79,6 +84,7 @@ export function createStrata(): Phenomenon {
 
       const pointerX = frame.pointer.x * width
       const pointerY = frame.pointer.y * height
+      const motion = strataMotionFactor(frame.reducedMotion)
 
       layers.forEach((layer, index) => {
         const normalized = index / Math.max(1, layers.length - 1)
@@ -89,7 +95,7 @@ export function createStrata(): Phenomenon {
           const nx = sample / width
           const ridge =
             Math.sin(nx * Math.PI * (2.6 + frame.state.scale * 3.4) + layer.phase) * layer.amplitude +
-            Math.cos(nx * Math.PI * 11 * layer.roughness + frame.elapsed * 0.04) * layer.amplitude * 0.18
+            Math.cos(nx * Math.PI * 11 * layer.roughness + frame.elapsed * 0.04 * motion) * layer.amplitude * 0.18
           const tilt = (nx - 0.5) * width * layer.skew * (0.25 + frame.state.scale * 0.55)
           const pointerDistance = Math.hypot(sample - pointerX, baseY - pointerY)
           const indentation = Math.exp(-(pointerDistance * pointerDistance) / (11000 + frame.state.force * 24000))

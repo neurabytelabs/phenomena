@@ -53,7 +53,7 @@ async function main() {
   assert(html.includes('site.webmanifest'), 'Missing manifest link in built HTML.')
   assert(html.includes('og.svg'), 'Missing OG asset marker in built HTML.')
   assert(html.includes('theme-color'), 'Missing theme-color metadata.')
-  assert(html.includes('noindex,nofollow'), 'Missing Release 1 noindex metadata.')
+  assert(!html.includes('noindex'), 'Indexable release must not contain noindex metadata.')
   assert(
     html.includes('href="https://phenomena.91-98-46-190.sslip.io/"'),
     'Canonical URL does not match the isolated deployment host.'
@@ -68,8 +68,14 @@ async function main() {
   assert(distEntries.includes('og.svg'), 'Missing generated OG asset.')
   assert(distEntries.includes('robots.txt'), 'Missing robots.txt asset.')
   assert(distEntries.includes('site.webmanifest'), 'Missing site manifest asset.')
+  assert(distEntries.includes('sitemap.xml'), 'Missing sitemap asset.')
   const robots = await readFile(path.join(distDir, 'robots.txt'), 'utf8')
-  assert(robots.includes('Disallow: /'), 'Release 1 robots policy must block crawling.')
+  assert(robots.includes('Allow: /'), 'Indexable release must allow crawling.')
+  assert(robots.includes('Sitemap: https://phenomena.91-98-46-190.sslip.io/sitemap.xml'), 'Missing sitemap declaration.')
+  assert(!robots.includes('Disallow: /'), 'Indexable release must not block crawling.')
+  const sitemap = await readFile(path.join(distDir, 'sitemap.xml'), 'utf8')
+  assert(sitemap.includes('https://phenomena.91-98-46-190.sslip.io/'), 'Sitemap canonical URL mismatch.')
+  assert(!/<(?:[\w-]+:)?lastmod\b/i.test(sitemap), 'Candidate sitemap must not carry a stale or anticipatory lastmod.')
 
   const assetsDir = path.join(distDir, 'assets')
   const assetEntries = await readdir(assetsDir)
@@ -89,7 +95,7 @@ async function main() {
   assert(nginx.includes('location /assets/'), 'Missing strict asset location.')
   assert(nginx.includes('location ~* \\.[a-z0-9]+$'), 'Missing strict unknown-file route.')
   assert(nginx.includes('try_files $uri =404;'), 'Missing real 404 behavior for unknown assets.')
-  assert(nginx.includes('X-Robots-Tag "noindex, nofollow"'), 'Missing runtime noindex header.')
+  assert(!nginx.includes('X-Robots-Tag'), 'Indexable release must not emit a runtime noindex header.')
   assert(dockerfile.includes('HEALTHCHECK'), 'Missing container healthcheck.')
   assert(
     packageJson.optionalDependencies?.['@rollup/rollup-linux-x64-musl'] === '4.62.2',

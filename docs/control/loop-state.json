@@ -1,15 +1,16 @@
 {
   "project": "PHENOMENA",
-  "status": "LOCAL_RELEASE_CANDIDATE_VERIFIED_REVIEW_PENDING",
+  "status": "LIVE_NOINDEX_VERIFIED_INDEXABLE_PROMOTION_APPROVED_DEPLOY_PENDING",
   "started_at": "2026-08-18T23:50:00+03:00",
   "target_morning_gate": "2026-08-19T06:00:00+03:00",
-  "current_loop": "L3_INDEPENDENT_REVIEW_AND_PUBLICATION_PREFLIGHT",
-  "next_loop": "TASK12_PUBLIC_REPO_AND_ISOLATED_DEPLOY",
+  "current_loop": "L4_INDEXABLE_PROMOTION",
+  "next_loop": "TASK13_LIVE_TRUTH_SYNC",
   "completed_loops": [
     "L0_CONTEXT_AND_DESIGN",
     "L1_FOUNDATION_AND_HERO",
     "L2_SYSTEMS_AND_INTERACTION",
-    "L3_LOCAL_VERIFICATION"
+    "L3_LOCAL_VERIFICATION",
+    "L4_NOINDEX_DEPLOY_AND_LIVE_QA"
   ],
   "fixed_decisions": {
     "product": "living-systems instrument",
@@ -28,26 +29,34 @@
     "desktop_browser": true,
     "mobile_browser": true,
     "console_errors_zero": true,
-    "public_repo_verified": false,
-    "deployment_verified": false,
-    "live_tls_verified": false,
+    "public_repo_verified": true,
+    "deployment_verified": true,
+    "live_tls_verified": true,
     "core_truth_synced": false
   },
   "workers": {
     "RICK": "active",
     "MORTY": "unreachable-at-preflight",
     "SUMMER": "unreachable-at-preflight",
-    "local_review_agents": "active"
+    "local_review_agents": "approved"
   },
-  "blockers": [
-    "Docker daemon was unavailable locally, so container build/run verification remains a remote Coolify gate."
+  "blockers": [],
+  "deferred": [
+    "Branded mustafasarac.com DNS requires a manual Cloudflare login; Release 1 uses the reversible sslip.io host."
   ],
   "external_side_effects": {
     "repo_created": true,
-    "push_done": false,
-    "coolify_app_created": false,
-    "deploy_started": false,
+    "push_done": true,
+    "coolify_app_created": true,
+    "deploy_started": true,
     "dns_changed": false,
     "existing_service_changed": false
+  },
+  "live_noindex_evidence": {
+    "url": "https://phenomena.91-98-46-190.sslip.io/",
+    "application_uuid": "6slokigyf8nsclqbtv5gjth4",
+    "deployment_uuid": "q56hurytky4432i47uberuux",
+    "commit": "37eeeca307c16bf366146f32fab44e78e941ddb6",
+    "application_status": "running:healthy"
   }
 }

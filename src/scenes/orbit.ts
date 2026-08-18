@@ -7,6 +7,10 @@ interface TrailPoint {
   y: number
 }
 
+export function orbitTrailLimit(memory: number, density: number): number {
+  return Math.round(32 + density * 40 + clamp(memory, 0, 1) * 100)
+}
+
 export function createOrbit(): Phenomenon {
   let bodies: Body[] = []
   let trails: TrailPoint[][] = []
@@ -19,19 +23,20 @@ export function createOrbit(): Phenomenon {
       vy: body.vy + (index % 2 === 0 ? 0.18 : -0.18)
     }))
     trails = bodies.map(() => [])
-    historyLimit = Math.round(56 + viewport.density * 70)
+    historyLimit = orbitTrailLimit(0.48, viewport.density)
   }
 
   return {
     id: 'orbit',
     title: 'ORBIT',
-    equation: 'ẍ = Σ Gm(r)/(r²+ε²)^(3/2)',
-    description: 'A small gravity field draws quiet trail structures that bend around a temporary attractor.',
-    hint: 'Hover to redirect the system. Hold to strengthen the attractor, then let the bodies settle again.',
+    equation: 'ẍ = Σ Gm(r)/(r²+ε²)^(3/2), τtrail = f(MEMORY)',
+    description: 'A small gravity field draws persistent trail structures that bend around a temporary attractor.',
+    hint: 'Hover to redirect. Hold to strengthen the attractor; MEMORY lengthens the visible orbital history.',
     reset(seed, viewport) {
       initialize(seed, viewport)
     },
     update(frame) {
+      historyLimit = orbitTrailLimit(frame.state.memory, frame.viewport.density)
       const pointer: GravitySource | undefined = frame.pointer.active
         ? {
             x: lerp(-0.5, 0.5, frame.pointer.x),

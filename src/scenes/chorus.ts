@@ -1,4 +1,4 @@
-import { lerp, mapRange } from '../core/math'
+import { clamp, lerp, mapRange } from '../core/math'
 import { createRandom, randomBetween } from '../core/random'
 import type { FrameContext, Phenomenon, Viewport } from '../core/types'
 
@@ -7,6 +7,10 @@ interface Voice {
   rateX: number
   rateY: number
   amplitude: number
+}
+
+export function chorusTemporalRate(memory: number): number {
+  return lerp(1.25, 0.45, clamp(memory, 0, 1))
 }
 
 export function createChorus(): Phenomenon {
@@ -26,9 +30,9 @@ export function createChorus(): Phenomenon {
   return {
     id: 'chorus',
     title: 'CHORUS',
-    equation: 'x=sin(at+φ), y=sin(bt+κ·pointer)',
-    description: 'A harmonic lattice braids phase relationships into a slow visual chorus without any audio.',
-    hint: 'Move to retune the phase. Hold to tighten the coupling between the voices.',
+    equation: 'x=sin(a·μ(M)t+κ·pointer+φ), y=sin(b·μ(M)t+φ)·A(coupling)',
+    description: 'A harmonic lattice braids phase relationships into a visual chorus without any audio.',
+    hint: 'Move to retune the phase. Hold to tighten coupling; MEMORY slows phase drift into sustained patterns.',
     reset(seed, viewport) {
       initialize(seed, viewport)
     },
@@ -43,6 +47,7 @@ export function createChorus(): Phenomenon {
       ctx.fillRect(0, 0, width, height)
 
       const motion = frame.reducedMotion ? 0.18 : 1
+      const temporalRate = chorusTemporalRate(frame.state.memory)
       const coupling = frame.pointer.active ? frame.pointer.influence * (0.8 + frame.state.force) : 0.08
       const phaseBias = frame.pointer.active ? lerp(-Math.PI, Math.PI, frame.pointer.x) : 0
 
@@ -58,12 +63,18 @@ export function createChorus(): Phenomenon {
           const x =
             width * 0.08 +
             t * width * 0.84 +
-            Math.sin(t * Math.PI * 2 * voice.rateX + frame.elapsed * 0.4 * motion + voice.phase + phaseBias) *
+            Math.sin(
+              t * Math.PI * 2 * voice.rateX + frame.elapsed * 0.4 * motion * temporalRate + voice.phase + phaseBias
+            ) *
               18 *
               coupling
           const y =
             centerY +
-            Math.sin(t * Math.PI * 2 * voice.rateY + frame.elapsed * (0.2 + normalized * 0.22) * motion + voice.phase) *
+            Math.sin(
+              t * Math.PI * 2 * voice.rateY +
+                frame.elapsed * (0.2 + normalized * 0.22) * motion * temporalRate +
+                voice.phase
+            ) *
               amplitude *
               (0.28 + coupling * 0.72)
           if (sample === 0) {

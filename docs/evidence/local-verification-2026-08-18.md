@@ -1,8 +1,8 @@
 # PHENOMENA Local Verification
 
 Verification window: August 18–19, 2026
-Repository: `https://github.com/neurabytelabs/phenomena` (public; implementation push pending)
-Live status: not claimed
+Repository: `https://github.com/neurabytelabs/phenomena`
+Live status: noindex Release 1 verified at `https://phenomena.91-98-46-190.sslip.io/`; indexable promotion pending
 
 ## Automated checks
 
@@ -16,13 +16,14 @@ Result: passed.
 npm test -- --run
 ```
 
-Result: passed with 15 tests across:
+Result: passed with 18 tests across:
 
 - `tests/smoke.test.ts`
 - `tests/random.test.ts`
 - `tests/state.test.ts`
 - `tests/math.test.ts`
 - `tests/physics.test.ts`
+- `tests/scene-parameters.test.ts`
 
 ```bash
 npm run build
@@ -32,9 +33,9 @@ Result: passed.
 
 Final build output:
 
-- `dist/index.html` 1.43 kB
-- `dist/assets/index-CmeEJ6Hk.css` 5.54 kB
-- `dist/assets/index-C0QhfGF8.js` 19.05 kB
+- `dist/index.html` 1.37 kB
+- `dist/assets/index-CgeDsdmC.css` 5.54 kB
+- `dist/assets/index-CV1Hvv1L.js` 19.37 kB
 
 ```bash
 npm run verify
@@ -82,6 +83,13 @@ Mobile QA at `390×844`:
 - a visible toast no longer intercepts scene controls (`pointer-events: none`)
 - runtime exception, console error, log warning, and failed-request set: empty
 
+Latest-disk scene grammar verification:
+
+- ORBIT maps `MEMORY` to bounded trail persistence.
+- CHORUS maps `MEMORY` to temporal phase persistence; a paused live-canvas PNG digest changed when `MEMORY` changed from `0` to `1`.
+- STRATA applies the reduced-motion factor to ambient drift and fracture expansion.
+- Fresh local browser reload after these fixes produced zero runtime, console, log, or network errors.
+
 Visual verdict: `CONDITIONAL PASS`. The primary metaphor and four scene identities are visible; Pelagic is intentionally closest to the reference language, while Strata and Chorus remain line-based relatives and Orbit is deliberately sparse. No release-blocking overlap remains.
 
 ## Container attempt
@@ -102,13 +110,31 @@ Result: failed because the Docker daemon was unavailable:
 Cannot connect to the Docker daemon at unix:///Users/mustafa/.docker/run/docker.sock
 ```
 
-Container runtime checks were not claimed locally. The Dockerfile now includes a healthcheck; the proof gap must be closed by the actual isolated Coolify image build, runtime health, headers, 404, and TLS checks.
+Container runtime checks were not claimed locally. The proof gap was subsequently closed by the isolated Coolify image build and live runtime evidence below.
+
+## Live noindex deployment evidence
+
+- Public implementation commit was pushed and remote `main` matched local `HEAD`.
+- Coolify application `6slokigyf8nsclqbtv5gjth4` was created as a new isolated resource in NeuraByte Labs / production.
+- Two build-contract defects and one nginx parse defect were observed remotely and fixed at their source; no existing service was used as a fallback.
+- Final noindex deployment `q56hurytky4432i47uberuux` finished from commit `37eeeca307c16bf366146f32fab44e78e941ddb6`.
+- Coolify read-back reported `running:healthy`.
+- DNS resolved to `91.98.46.190`; TLS presented the exact hostname with a valid Let's Encrypt certificate.
+- Live HTML: HTTP 200, `Cache-Control: no-store`, CSP, nosniff, and `X-Robots-Tag: noindex, nofollow`.
+- Live hashed JavaScript: HTTP 200, `Cache-Control: public, max-age=31536000, immutable`, with the same security/noindex headers.
+- `/does-not-exist.asset`: HTTP 404.
+- `/instrument/pelagic`: HTTP 200 application shell.
+- Desktop `1512×888`: canvas present, overflow `0`, Remix/Info/Escape/scene transitions passed, console errors `0`.
+- Mobile `390×844`: overflow `0`, scene/action gap `13.4 px`, action/control gap `21.9 px`, open info/scene gap `12.9 px`, toast/scene gap `12.9 px`, console and failed application requests `0`.
 
 ## Review summary
 
-- README and `docs/control/loop-state.json` are synchronized to the local release-candidate state
-- Public repository exists; implementation commit/push is still pending
-- No live deployment, DNS, TLS, or Coolify application is claimed yet
+- README and `docs/control/loop-state.json` are synchronized to the verified live-noindex state
+- Independent final candidate review returned `APPROVED` after nginx SPA/404 and publication-truth fixes
+- Indexable-promotion review requested release-wording and sitemap-verifier fixes; each finding was corrected
+- A delayed spec review identified missing ORBIT/CHORUS `MEMORY` mappings and STRATA reduced-motion consistency; the current working tree fixes these with regression coverage
+- Latest-disk independent re-review returned `APPROVED` with no critical, important, or minor findings
+- Indexable promotion remains a separate commit/deploy/read-back gate
 - Lithosphere remained untouched
 
 ## First measured learning / kill gate

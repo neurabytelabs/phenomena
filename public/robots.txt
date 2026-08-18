@@ -1,2 +1,4 @@
 User-agent: *
-Disallow: /
+Allow: /
+
+Sitemap: https://phenomena.91-98-46-190.sslip.io/sitemap.xml
