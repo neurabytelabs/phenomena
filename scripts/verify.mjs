@@ -87,6 +87,7 @@ async function main() {
 
   assert(nginx.includes('try_files $uri $uri/ /index.html;'), 'Missing SPA route fallback.')
   assert(nginx.includes('location /assets/'), 'Missing strict asset location.')
+  assert(nginx.includes('location ~* \\.[a-z0-9]+$'), 'Missing strict unknown-file route.')
   assert(nginx.includes('try_files $uri =404;'), 'Missing real 404 behavior for unknown assets.')
   assert(nginx.includes('X-Robots-Tag "noindex, nofollow"'), 'Missing runtime noindex header.')
   assert(dockerfile.includes('HEALTHCHECK'), 'Missing container healthcheck.')
