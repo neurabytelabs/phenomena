@@ -1,12 +1,15 @@
 {
   "project": "PHENOMENA",
-  "status": "PLAN_COMPLETE_BUILD_ACTIVE",
+  "status": "LOCAL_RELEASE_CANDIDATE_VERIFIED_REVIEW_PENDING",
   "started_at": "2026-08-18T23:50:00+03:00",
   "target_morning_gate": "2026-08-19T06:00:00+03:00",
-  "current_loop": "L1_FOUNDATION_AND_HERO",
-  "next_loop": "L2_SYSTEMS_AND_INTERACTION",
+  "current_loop": "L3_INDEPENDENT_REVIEW_AND_PUBLICATION_PREFLIGHT",
+  "next_loop": "TASK12_PUBLIC_REPO_AND_ISOLATED_DEPLOY",
   "completed_loops": [
-    "L0_CONTEXT_AND_DESIGN"
+    "L0_CONTEXT_AND_DESIGN",
+    "L1_FOUNDATION_AND_HERO",
+    "L2_SYSTEMS_AND_INTERACTION",
+    "L3_LOCAL_VERIFICATION"
   ],
   "fixed_decisions": {
     "product": "living-systems instrument",
@@ -18,12 +21,13 @@
     "old_lithosphere_mutation": false
   },
   "gates": {
-    "typecheck": false,
-    "tests": false,
-    "build": false,
-    "desktop_browser": false,
-    "mobile_browser": false,
-    "console_errors_zero": false,
+    "typecheck": true,
+    "tests": true,
+    "build": true,
+    "dependency_audit": true,
+    "desktop_browser": true,
+    "mobile_browser": true,
+    "console_errors_zero": true,
     "public_repo_verified": false,
     "deployment_verified": false,
     "live_tls_verified": false,
@@ -35,10 +39,12 @@
     "SUMMER": "unreachable-at-preflight",
     "local_review_agents": "active"
   },
-  "blockers": [],
+  "blockers": [
+    "Docker daemon was unavailable locally, so container build/run verification remains a remote Coolify gate."
+  ],
   "external_side_effects": {
     "repo_created": true,
-    "push_done": true,
+    "push_done": false,
     "coolify_app_created": false,
     "deploy_started": false,
     "dns_changed": false,

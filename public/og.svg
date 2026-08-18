@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#050608"/>
+  <path d="M0 410C171 309 276 288 389 311C498 333 566 441 695 454C803 466 936 401 1200 314" stroke="#9AD9FF" stroke-width="4" opacity=".8"/>
+  <path d="M0 292C141 224 252 202 357 220C481 242 560 343 669 358C805 377 930 293 1200 194" stroke="#F5F3EA" stroke-width="3" opacity=".7"/>
+  <path d="M0 505C188 437 283 422 389 435C498 448 580 520 693 532C852 548 949 505 1200 432" stroke="#C28DFF" stroke-width="2" opacity=".55"/>
+  <text x="88" y="200" fill="#F5F3EA" font-family="IBM Plex Mono, monospace" font-size="64" letter-spacing="10">PHENOMENA</text>
+  <text x="88" y="270" fill="#A3E5FF" font-family="IBM Plex Mono, monospace" font-size="32">Touch the equation. Watch the world answer.</text>
+</svg>
