@@ -2,7 +2,7 @@
 
 Touch the equation. Watch the world answer.
 
-Status on August 19, 2026 (+03): Release 1 is live, indexable, and browser-verified at [phenomena.91-98-46-190.sslip.io](https://phenomena.91-98-46-190.sslip.io/).
+Status on August 19, 2026 (+03): Release 1 is live, indexable, and browser-verified at [phenomena.mustafasarac.com](https://phenomena.mustafasarac.com/).
 
 PHENOMENA is a static Vite + TypeScript living-systems instrument by Mustafa Saraç / NeuraByte Labs. Release 1 ships four bounded scenes on one Canvas 2D surface:
 
@@ -70,11 +70,6 @@ npm run dev
 - ORBIT and CHORUS respond to `MEMORY`; STRATA respects reduced motion
 - Mobile toast remains visible normally and hides while the info panel is open, preventing text overlap
 
-## Next Optional Release Gate
-
-- Attach and verify a branded `phenomena.mustafasarac.com` host when Cloudflare access is available
-- Preserve the verified sslip.io host until branded DNS and TLS pass independently
-
 ## Explicit Exclusions
 
 - No backend
@@ -84,7 +79,6 @@ npm run dev
 - No AI runtime
 - No payments or messaging
 - No Lithosphere mutation
-- No branded DNS claim yet; Release 1 uses the reversible sslip.io host because Cloudflare required a manual login
 
 ## Evidence
 
