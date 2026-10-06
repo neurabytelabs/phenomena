@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://phenomena.91-98-46-190.sslip.io/sitemap.xml
+Sitemap: https://phenomena.mustafasarac.com/sitemap.xml

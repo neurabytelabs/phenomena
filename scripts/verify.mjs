@@ -55,11 +55,11 @@ async function main() {
   assert(html.includes('theme-color'), 'Missing theme-color metadata.')
   assert(!html.includes('noindex'), 'Indexable release must not contain noindex metadata.')
   assert(
-    html.includes('href="https://phenomena.91-98-46-190.sslip.io/"'),
+    html.includes('href="https://phenomena.mustafasarac.com/"'),
     'Canonical URL does not match the isolated deployment host.'
   )
   assert(
-    html.includes('content="https://phenomena.91-98-46-190.sslip.io/"'),
+    html.includes('content="https://phenomena.mustafasarac.com/"'),
     'Open Graph URL does not match the isolated deployment host.'
   )
 
@@ -71,10 +71,10 @@ async function main() {
   assert(distEntries.includes('sitemap.xml'), 'Missing sitemap asset.')
   const robots = await readFile(path.join(distDir, 'robots.txt'), 'utf8')
   assert(robots.includes('Allow: /'), 'Indexable release must allow crawling.')
-  assert(robots.includes('Sitemap: https://phenomena.91-98-46-190.sslip.io/sitemap.xml'), 'Missing sitemap declaration.')
+  assert(robots.includes('Sitemap: https://phenomena.mustafasarac.com/sitemap.xml'), 'Missing sitemap declaration.')
   assert(!robots.includes('Disallow: /'), 'Indexable release must not block crawling.')
   const sitemap = await readFile(path.join(distDir, 'sitemap.xml'), 'utf8')
-  assert(sitemap.includes('https://phenomena.91-98-46-190.sslip.io/'), 'Sitemap canonical URL mismatch.')
+  assert(sitemap.includes('https://phenomena.mustafasarac.com/'), 'Sitemap canonical URL mismatch.')
   assert(!/<(?:[\w-]+:)?lastmod\b/i.test(sitemap), 'Candidate sitemap must not carry a stale or anticipatory lastmod.')
 
   const assetsDir = path.join(distDir, 'assets')
