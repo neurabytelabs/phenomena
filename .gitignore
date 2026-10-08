@@ -6,3 +6,15 @@ coverage/
 .env
 .env.*
 !.env.example
+
+# agent / assistant tooling
+CLAUDE.md
+AGENTS.md
+GEMINI.md
+.claude/
+.cursor/
+.cursorrules
+.codex/
+.windsurf/
+.agents/
+.opencode/

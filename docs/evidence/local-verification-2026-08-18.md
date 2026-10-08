@@ -108,7 +108,7 @@ docker build -t phenomena:local .
 Result: failed because the Docker daemon was unavailable:
 
 ```text
-Cannot connect to the Docker daemon at unix:///Users/mustafa/.docker/run/docker.sock
+Cannot connect to the Docker daemon at unix://$HOME/.docker/run/docker.sock
 ```
 
 Container runtime checks were not claimed locally. The proof gap was subsequently closed by the isolated Coolify image build and live runtime evidence below.

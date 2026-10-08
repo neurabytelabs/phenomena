@@ -1,6 +1,6 @@
 # PHENOMENA Release 1 Implementation Plan
 
-> **For Hermes:** Use subagent-driven-development or the bounded Codex loop to implement this plan task-by-task. Preserve TDD for pure behavior and verify visual behavior in Ego.
+> **For implementers:** Use subagent-driven-development or the bounded Codex loop to implement this plan task-by-task. Preserve TDD for pure behavior and verify visual behavior in Ego.
 
 **Goal:** Ship a public, responsive living-systems instrument with four interactive scenes, reproducible share states, capture, accessibility, and an isolated verified Coolify deployment.
 
@@ -49,7 +49,7 @@ Expected: all exit 0; `dist/index.html` exists.
 
 ```bash
 git add package.json package-lock.json tsconfig.json vite.config.ts index.html src tests
-git commit -m "chore: scaffold PHENOMENA build and test pipeline (RICK)"
+git commit -m "chore: scaffold PHENOMENA build and test pipeline"
 ```
 
 ## Task 2: Build deterministic seed and URL state behavior with TDD
@@ -96,7 +96,7 @@ Run `npm test -- --run && npm run typecheck`.
 
 ```bash
 git add src/core tests
-git commit -m "feat: add deterministic share-state core (RICK)"
+git commit -m "feat: add deterministic share-state core"
 ```
 
 ## Task 3: Implement the canvas engine and input contract
@@ -142,7 +142,7 @@ Run tests/typecheck/build; start `npm run dev -- --host 127.0.0.1` and verify th
 
 ```bash
 git add src/core src/main.ts src/styles.css tests
-git commit -m "feat: add adaptive canvas and input engine (RICK)"
+git commit -m "feat: add adaptive canvas and input engine"
 ```
 
 ## Task 4: Pass the PELAGIC hero gate
@@ -174,7 +174,7 @@ git commit -m "feat: add adaptive canvas and input engine (RICK)"
 
 ```bash
 git add src/scenes src/main.ts src/styles.css
-git commit -m "feat: establish the PELAGIC hero system (RICK)"
+git commit -m "feat: establish the PELAGIC hero system"
 ```
 
 ## Task 5: Add STRATA through the same contract
@@ -194,7 +194,7 @@ git commit -m "feat: establish the PELAGIC hero system (RICK)"
 
 **Verification:** tests/typecheck/build plus still-frame comparison with PELAGIC.
 
-**Commit:** `feat: add the STRATA pressure field (RICK)`.
+**Commit:** `feat: add the STRATA pressure field`.
 
 ## Task 6: Add ORBIT through the same contract
 
@@ -216,7 +216,7 @@ Use a small number of bodies and fading trails. Pointer adds a temporary attract
 
 **Verification:** no NaN/Infinity after a deterministic 10,000-step test; browser remains responsive.
 
-**Commit:** `feat: add the ORBIT gravity field (RICK)`.
+**Commit:** `feat: add the ORBIT gravity field`.
 
 ## Task 7: Add CHORUS through the same contract
 
@@ -235,7 +235,7 @@ Use a small number of bodies and fading trails. Pointer adds a temporary attract
 
 **Verification:** automated checks and a distinguishable still frame.
 
-**Commit:** `feat: add the CHORUS resonance field (RICK)`.
+**Commit:** `feat: add the CHORUS resonance field`.
 
 ## Task 8: Close the interaction loop
 
@@ -262,7 +262,7 @@ Use a small number of bodies and fading trails. Pointer adds a temporary attract
 
 **Verification:** keyboard-only path, copied URL round trip, capture produces a non-empty PNG.
 
-**Commit:** `feat: close the remix inspect and share loop (RICK)`.
+**Commit:** `feat: close the remix inspect and share loop`.
 
 ## Task 9: Accessibility, mobile, metadata, and failure behavior
 
@@ -287,7 +287,7 @@ Use a small number of bodies and fading trails. Pointer adds a temporary attract
 
 **Verification:** DOM assertions, Lighthouse-style manual review, Ego mobile viewport, overflow `0`.
 
-**Commit:** `fix: harden PHENOMENA for mobile and accessible input (RICK)`.
+**Commit:** `fix: harden PHENOMENA for mobile and accessible input`.
 
 ## Task 10: Production container and deterministic verifier
 
@@ -319,7 +319,7 @@ curl -I http://127.0.0.1:8088/assets/<real-hash>
 docker stop phenomena-local
 ```
 
-**Commit:** `chore: add reproducible PHENOMENA release container (RICK)`.
+**Commit:** `chore: add reproducible PHENOMENA release container`.
 
 ## Task 11: README, evidence, and integration review
 
@@ -348,7 +348,7 @@ git diff --check
 git status --short
 ```
 
-**Commit:** `docs: prepare verified PHENOMENA release candidate (RICK)`.
+**Commit:** `docs: prepare verified PHENOMENA release candidate`.
 
 ## Task 12: Public repository and isolated deployment
 

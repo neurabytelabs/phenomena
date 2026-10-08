@@ -1,87 +1,83 @@
 # PHENOMENA
 
-Touch the equation. Watch the world answer.
+Four small simulations of natural systems on one canvas that you can push, remix and share as a link.
 
-Status on August 19, 2026 (+03): Release 1 is live, indexable, and browser-verified at [phenomena.mustafasarac.com](https://phenomena.mustafasarac.com/).
+[![License: MIT](https://img.shields.io/github/license/neurabytelabs/phenomena)](LICENSE)
 
-PHENOMENA is a static Vite + TypeScript living-systems instrument by Mustafa Saraç / NeuraByte Labs. Release 1 ships four bounded scenes on one Canvas 2D surface:
+**Live demo:** [phenomena.mustafasarac.com](https://phenomena.mustafasarac.com/)
 
-- `PELAGIC`
-- `STRATA`
-- `ORBIT`
-- `CHORUS`
+![The PELAGIC scene: contour lines drifting over a dark blue gradient, with scene and parameter controls](docs/media/pelagic.jpg)
 
-The visitor loop is `enter → perturb → compare → remix → inspect → share/capture`.
+## Why
 
-## Controls
+Each scene is driven by a short equation, and you can feel what it does by touching it instead of reading it. Every scene uses the same three controls and the same gestures, so moving between them is a comparison, not a new interface to learn. The whole state fits in the URL, so any moment can be shared as a link.
 
-- Pointer / touch: perturb the field
-- Hold: accumulate force
-- Release: let the system settle
-- Keyboard: `1–4` switch scenes, `R` remix, `Space` pause, `I` info
-- Bounded parameters: `FORCE`, `MEMORY`, `SCALE`
+| Scene | What it shows | Equation shown in the info panel |
+|---|---|---|
+| `PELAGIC` | Contour currents drift in stacked bands that bow around your touch and settle with inertia. | `h(x,t)=sin(ax+pt)+sin(bx-qt)+J(pointer, memory)` |
+| `STRATA` | Compressed layers bend into pressure ridges, then crack outward in short fracture rings. | `z(x,t)=ridge(x)+fault(x,t)+P(hold)-R(release)` |
+| `ORBIT` | A small gravity field draws persistent trail structures that bend around a temporary attractor. | `ẍ = Σ Gm(r)/(r²+ε²)^(3/2), τtrail = f(MEMORY)` |
+| `CHORUS` | A harmonic lattice braids phase relationships into a visual chorus, without any audio. | `x=sin(a·μ(M)t+κ·pointer+φ), y=sin(b·μ(M)t+φ)·A(coupling)` |
 
-## Architecture
+## Quick start
 
-- Vite + TypeScript
-- Canvas 2D engine with capped DPR and adaptive density
-- Deterministic seeded PRNG and URL serializer
-- Focused scene modules under one shared `Phenomenon` contract
-- Vitest for pure logic
-- Custom verifier for metadata, assets, forbidden features, and bundle budget
-- nginx production runtime with SPA fallback and security headers
-
-## Local Run
+You need Node.js 22 (the version CI uses).
 
 ```bash
+git clone https://github.com/neurabytelabs/phenomena.git
+cd phenomena
 npm install
-npm run typecheck
-npm test -- --run
-npm run build
-npm run verify
 npm run dev
 ```
 
-## Verified On August 19, 2026 (+03)
+Checks (the same steps CI runs):
 
-- `npm run typecheck` passed
-- `npm test -- --run` passed with 21 tests
-- `npm run build` passed
-- `npm run verify` passed
-- `npm audit --audit-level=moderate` passed with 0 vulnerabilities
-- Desktop browser QA completed against the HTTP-served production preview in `ego-browser`
-- Mobile browser QA completed at `390×844` with horizontal overflow `0` and positive gaps between every control layer
-- Fresh runtime exception, console error, log warning, and failed-request set was empty
-- URL state round-trip verified for scene and bounded parameters
-- All four scenes translate `FORCE`, `MEMORY`, and `SCALE`; scene parameter mappings have regression tests
-- The builder provenance is a visible, keyboard-focusable link in the main UI and unsupported-canvas fallback, including the `390×844` target
-- Four still scenes were captured and visually distinguished
+```bash
+npm run typecheck
+npm test -- --run   # Vitest unit tests
+npm run build
+npm run verify      # checks dist/ and the source: metadata, assets, forbidden APIs, JS bundle under 250 KB
+```
 
-## Live Indexable Verification
+## Usage
 
-- Public repository and deployed commit were reconciled
-- Isolated Coolify application reports `running:healthy`
-- Valid Let's Encrypt TLS and canonical host were verified
-- HTML returns `no-store`; hashed assets return immutable one-year caching
-- HTML has no robots noindex directive or `X-Robots-Tag`; `robots.txt` allows crawling and advertises the sitemap
-- `sitemap.xml` returns HTTP 200 with the canonical live URL
-- Unknown asset returns HTTP 404; an extensionless SPA route returns the application shell
-- Desktop and 390×844 mobile interactions, layout, runtime, console, network, and visual gates passed
-- ORBIT and CHORUS respond to `MEMORY`; STRATA respects reduced motion
-- Mobile toast remains visible normally and hides while the info panel is open, preventing text overlap
+- **Pointer / touch:** perturb the field.
+- **Hold:** accumulate force. **Release:** let the system settle.
+- **Keyboard:** `1`–`4` switch scenes, `R` remix (new seed), `Space` pause, `I` info, `Esc` close info.
+- **Parameters:** `FORCE`, `MEMORY`, `SCALE`, each clamped to a fixed range.
+- **Share** copies a link with the scene, seed and parameters. **Capture** saves the canvas as a PNG.
 
-## Explicit Exclusions
+## How it works
 
-- No backend
-- No analytics
-- No accounts
-- No camera or microphone
-- No AI runtime
-- No payments or messaging
-- No Lithosphere mutation
+PHENOMENA is a static Vite + TypeScript site with no runtime dependencies. Everything is drawn with the Canvas 2D API.
 
-## Evidence
+```mermaid
+flowchart LR
+    I[Pointer, touch,<br/>keyboard, sliders] --> S[State<br/>scene, seed, FORCE,<br/>MEMORY, SCALE]
+    U[URL query] <--> S
+    S --> E[Engine loop]
+    E --> P[Active scene<br/>reset / update / render]
+    P --> C[Canvas 2D]
+```
 
-- Build contract: [`docs/control/master-prompt.md`](docs/control/master-prompt.md)
-- Design spec: [`docs/specs/2026-08-18-phenomena-design.md`](docs/specs/2026-08-18-phenomena-design.md)
-- Verification log: [`docs/evidence/local-verification-2026-08-18.md`](docs/evidence/local-verification-2026-08-18.md)
+- **Engine** ([`src/core/engine.ts`](src/core/engine.ts)) caps the device pixel ratio and picks a particle/line density from the viewport size, pointer type and reduced-motion setting.
+- **Scenes** ([`src/scenes/`](src/scenes/)) each implement one `Phenomenon` interface (`reset`, `update`, `render`) from [`src/core/types.ts`](src/core/types.ts).
+- **State** ([`src/core/state.ts`](src/core/state.ts)) is clamped and serialized to the URL query, and a seeded PRNG ([`src/core/random.ts`](src/core/random.ts)) makes the same link produce the same starting scene.
+- **Deployment:** the [`Dockerfile`](Dockerfile) builds and verifies the site, then serves `dist/` with nginx. [`nginx.conf`](nginx.conf) adds a SPA fallback, a strict Content Security Policy, a `Permissions-Policy` that blocks camera, microphone and geolocation, and long-lived caching for hashed assets.
+
+The product design notes are in [`docs/specs/2026-08-18-phenomena-design.md`](docs/specs/2026-08-18-phenomena-design.md).
+
+## Status / limits
+
+Release 1 (package version 0.1.0, no tagged release yet).
+
+- Four scenes only; there is no editor and no way to add your own equations from the UI.
+- The simulations are visual approximations, not physically accurate models.
+- Unit tests cover the pure logic (math, physics helpers, PRNG, state, scene parameters, a smoke test). Rendering and interaction have no automated tests.
+- `npm run verify` only checks the build output and source rules; it does not run the app in a browser.
+- By design there is no backend, analytics, accounts, camera, microphone or audio.
+- Needs a browser with Canvas 2D; there is a plain fallback message when the canvas is not available.
+
+## License
+
+MIT. See [LICENSE](LICENSE). © 2026 Mustafa Saraç / NeuraByte Labs.
